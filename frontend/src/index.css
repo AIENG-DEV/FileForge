@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --accent: #fc6203;
+    --accent-glow: rgba(252, 98, 3, 0.4);
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Custom glow and accent utilities */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(252, 98, 3, 0.45);
+}
+
+.glow-accent-sm {
+  box-shadow: 0 0 10px rgba(252, 98, 3, 0.35);
+}
+
+.glow-accent-lg {
+  box-shadow: 0 0 35px rgba(252, 98, 3, 0.55);
+}
+
+.glow-border {
+  border-color: #fc6203 !important;
+  box-shadow: 0 0 15px rgba(252, 98, 3, 0.35);
+}
+
+.glow-text {
+  text-shadow: 0 0 12px rgba(252, 98, 3, 0.6);
+}
+
+/* Base dark class support */
+.dark {
+  color-scheme: dark;
+}
+
+html.dark {
+  background-color: #000000;
+  color: #f1f5f9;
+}
+
+html:not(.dark) {
+  background-color: #ffffff;
+  color: #0f172a;
+}

@@ -1,0 +1,14 @@
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9
+Pillow==10.3.0
+pypdf==4.2.0
+pydub==0.25.1
+ffmpeg-python==0.2.0
+python-docx==1.1.2
+openpyxl==3.1.2
+aiofiles==23.2.1
+scour==0.38.2
+
+pydantic-settings==2.2.1
+imageio-ffmpeg>=0.5.1

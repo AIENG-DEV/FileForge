@@ -1,0 +1,19 @@
+{
+  "name": "FileForge — Universal File Compressor",
+  "short_name": "FileForge",
+  "description": "Compress, convert, and upscale any file format with ease.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#fc6203",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+
