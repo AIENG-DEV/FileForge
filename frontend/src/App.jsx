@@ -17,7 +17,7 @@ export default function App() {
   const [section, setSection] = useState('image');
   const [files, setFiles] = useState([]);
   const [installPrompt, setInstallPrompt] = useState(null);
-  const { formats, loading } = useFormats();
+  const { formats, loading, isWakingUp } = useFormats();
   const { jobs, startPolling, setJobError, getDownloadUrl: getUrl } = useJob();
 
   useEffect(() => {
@@ -148,6 +148,14 @@ export default function App() {
           </div>
         </div>
       </header>
+
+      {/* Cloud Cold Start Indicator */}
+      {isWakingUp && (
+        <div className="bg-[#fc6203]/10 border-b border-[#fc6203]/25 px-4 py-2 text-center text-xs text-[#fc6203] font-medium flex items-center justify-center gap-2">
+          <Zap className="w-3.5 h-3.5 animate-bounce" />
+          <span>Connecting to cloud engine... (Free cloud instances may take ~30s to wake up on first load)</span>
+        </div>
+      )}
 
       {/* Main Container */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 sm:gap-6 p-4 sm:p-6">
