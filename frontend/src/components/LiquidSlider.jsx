@@ -24,11 +24,11 @@ export default function LiquidSlider({
     <div className="space-y-2 select-none">
       {/* Top Header with live badge */}
       <div className="flex items-center justify-between text-xs font-medium">
-        <span className="text-slate-600 dark:text-neutral-400">{label}</span>
+        <span className="text-slate-700 dark:text-neutral-300">{label}</span>
         <div
-          className={`px-2 py-0.5 rounded-full text-[11px] font-mono font-bold transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]
+          className={`px-2 py-0.5 rounded-full text-[11px] font-mono font-bold transition-all duration-300
             ${isDragging || isHovered
-              ? 'bg-[#fc6203] text-black shadow-[0_0_15px_rgba(252,98,3,0.8)] scale-110 rotate-1'
+              ? 'bg-[#fc6203] text-black shadow-[0_0_15px_rgba(252,98,3,0.8)] scale-105'
               : 'bg-slate-100 dark:bg-white/10 text-[#fc6203] border border-slate-200 dark:border-white/10'
             }`}
         >
@@ -54,7 +54,7 @@ export default function LiquidSlider({
           />
         </div>
 
-        {/* Liquid Thumb (Controlled via standard range input overlay for 100% native accessibility) */}
+        {/* Liquid Thumb (Controlled via standard range input overlay for native accessibility) */}
         <input
           type="range"
           min={min}
@@ -69,10 +69,10 @@ export default function LiquidSlider({
           aria-label={label}
         />
 
-        {/* Visual Glowing Thumb with Spring Wobble */}
+        {/* Visual Glowing Thumb with Spring Scale */}
         <div
           className={`absolute pointer-events-none top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#fc6203] border-2 border-white dark:border-black shadow-[0_0_16px_rgba(252,98,3,0.9)] transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)]
-            ${isDragging ? 'scale-125 shadow-[0_0_24px_rgba(252,98,3,1)]' : isHovered ? 'scale-120' : 'scale-100'}
+            ${isDragging ? 'scale-125 shadow-[0_0_24px_rgba(252,98,3,1)]' : isHovered ? 'scale-115' : 'scale-100'}
           `}
           style={{ left: `calc(${pct}% - ${pct * 0.16}px)` }}
         />
@@ -88,10 +88,10 @@ export default function LiquidSlider({
                 key={p.value}
                 type="button"
                 onClick={() => onChange(p.value)}
-                className={`py-1 rounded-lg text-[10px] font-mono font-medium transition-all duration-200 cursor-pointer text-center select-none hover-wobble active:scale-95
+                className={`py-1 rounded-lg text-[10px] font-mono font-medium cursor-pointer text-center select-none spring-pill
                   ${isSelected
                     ? 'bg-[#fc6203] text-black font-bold shadow-[0_0_12px_rgba(252,98,3,0.5)] scale-[1.03]'
-                    : 'bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-neutral-400 hover:text-slate-800 dark:hover:text-white border border-slate-200/60 dark:border-white/5'
+                    : 'bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/10'
                   }`}
               >
                 {p.label}

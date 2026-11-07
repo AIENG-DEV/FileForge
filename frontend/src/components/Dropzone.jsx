@@ -19,7 +19,7 @@ export default function Dropzone({ onFiles, accept = '*', category = 'any' }) {
       className={`relative border-2 border-dashed rounded-3xl p-8 sm:p-12 text-center cursor-pointer transition-all duration-300 select-none
         ${dragging
           ? 'border-[#fc6203] bg-orange-500/10 shadow-[0_0_40px_rgba(252,98,3,0.4)] scale-[1.01]'
-          : 'glass-panel-light dark:glass-panel-dark border-slate-300 dark:border-white/10 hover:border-[#fc6203] hover:shadow-[0_0_25px_rgba(252,98,3,0.25)]'
+          : 'glass-panel border-slate-300 dark:border-white/10 hover:border-[#fc6203] hover:shadow-[0_0_25px_rgba(252,98,3,0.25)]'
         }`}
     >
       <input
@@ -31,18 +31,18 @@ export default function Dropzone({ onFiles, accept = '*', category = 'any' }) {
         onChange={e => handle(e.target.files)}
       />
 
-      {/* Floating Modern Icon with Liquid Glow */}
+      {/* Floating Modern Icon with Liquid Jelly Wobble */}
       <div className="flex justify-center mb-4">
-        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 hover-wobble
+        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 wobble-hover spring-pill
           ${dragging
             ? 'bg-[#fc6203] text-black shadow-[0_0_30px_rgba(252,98,3,0.9)]'
-            : 'bg-white/80 dark:bg-white/5 text-[#fc6203] border border-slate-200 dark:border-white/10 shadow-lg'
+            : 'bg-slate-100 dark:bg-white/5 text-[#fc6203] border border-slate-200 dark:border-white/10 shadow-md'
           }`}
         >
           {dragging ? (
             <FolderUp className="w-8 h-8 animate-bounce" />
           ) : (
-            <UploadCloud className="w-8 h-8 transition-transform duration-300 group-hover:scale-110" />
+            <UploadCloud className="w-8 h-8" />
           )}
         </div>
       </div>
@@ -58,7 +58,7 @@ export default function Dropzone({ onFiles, accept = '*', category = 'any' }) {
 
       {accept && accept !== '*' && (
         <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono
-          bg-slate-100/80 dark:bg-white/5 text-slate-600 dark:text-neutral-400 border border-slate-200/80 dark:border-white/10">
+          bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-neutral-400 border border-slate-200 dark:border-white/10">
           <span className="text-[#fc6203] font-bold">Formats:</span> {accept.replace(/\./g, ' ').toUpperCase()}
         </div>
       )}

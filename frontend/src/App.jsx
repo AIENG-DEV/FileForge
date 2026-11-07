@@ -104,11 +104,11 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-black text-slate-900 dark:text-neutral-100 transition-colors duration-200">
       {/* Sleek Liquid Glass Navigation Bar */}
-      <header className="sticky top-0 z-50 glass-panel-light dark:glass-panel-dark border-b border-slate-200/80 dark:border-white/10 px-4 sm:px-6 py-2.5">
+      <header className="sticky top-0 z-50 glass-panel border-b border-slate-200/80 dark:border-white/10 px-4 sm:px-6 py-2.5">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           {/* Logo & Balanced Branding */}
-          <div className="flex items-center gap-2 sm:gap-2.5 hover-wobble cursor-pointer">
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black dark:bg-white/5 flex items-center justify-center border border-slate-300 dark:border-white/10 shadow-[0_0_12px_rgba(252,98,3,0.35)]">
+          <div className="flex items-center gap-2 sm:gap-2.5 cursor-pointer">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black dark:bg-white/5 flex items-center justify-center border border-slate-300 dark:border-white/10 shadow-[0_0_12px_rgba(252,98,3,0.35)] wobble-hover">
               <Zap className="w-4 h-4 text-[#fc6203]" />
             </div>
             <div className="flex items-baseline gap-1.5">
@@ -126,7 +126,7 @@ export default function App() {
             <button
               type="button"
               onClick={handleInstallClick}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#fc6203]/10 text-[#fc6203] border border-[#fc6203]/30 hover:bg-[#fc6203] hover:text-black transition-all cursor-pointer shadow-[0_0_10px_rgba(252,98,3,0.15)] hover-wobble active:scale-95"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#fc6203]/10 text-[#fc6203] border border-[#fc6203]/30 hover:bg-[#fc6203] hover:text-black transition-all cursor-pointer shadow-[0_0_10px_rgba(252,98,3,0.15)] spring-pill"
               title="Install app to your device"
             >
               <Smartphone className="w-3.5 h-3.5" />
@@ -176,7 +176,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={handleProcessAll}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#fc6203] hover:bg-[#e05400] text-black font-semibold text-xs transition-all shadow-[0_0_15px_rgba(252,98,3,0.4)] cursor-pointer hover-wobble active:scale-95"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#fc6203] hover:bg-[#e05400] text-black font-semibold text-xs transition-all shadow-[0_0_15px_rgba(252,98,3,0.4)] cursor-pointer spring-pill"
                   >
                     <Play className="w-3 h-3 fill-current" />
                     <span>Process All ({uncompletedFiles.length})</span>
@@ -187,7 +187,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={handleDownloadAll}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-all shadow-sm cursor-pointer hover-wobble active:scale-95"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-all shadow-sm cursor-pointer spring-pill"
                   >
                     <DownloadCloud className="w-3.5 h-3.5" />
                     <span>Download All ZIP ({completedJobIds.length})</span>
@@ -197,7 +197,7 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => setFiles([])}
-                  className="text-xs text-red-500 hover:text-red-600 dark:hover:text-red-400 cursor-pointer ml-1 hover-wobble active:scale-95"
+                  className="text-xs text-red-500 hover:text-red-600 dark:hover:text-red-400 cursor-pointer ml-1 spring-pill"
                 >
                   Clear all
                 </button>
@@ -225,8 +225,8 @@ export default function App() {
 
         {/* Empty State */}
         {files.length === 0 && (
-          <div className="text-center py-12 border border-dashed border-slate-200 dark:border-white/10 rounded-3xl glass-panel-light dark:glass-panel-dark">
-            <div className="w-12 h-12 mx-auto rounded-2xl bg-white/80 dark:bg-white/5 text-slate-400 dark:text-neutral-500 border border-slate-200 dark:border-white/10 flex items-center justify-center mb-2.5 shadow-sm hover-wobble">
+          <div className="text-center py-12 border border-dashed border-slate-200 dark:border-white/10 rounded-3xl glass-panel">
+            <div className="w-12 h-12 mx-auto rounded-2xl bg-white/80 dark:bg-white/5 text-slate-400 dark:text-neutral-500 border border-slate-200 dark:border-white/10 flex items-center justify-center mb-2.5 shadow-sm wobble-hover">
               <FolderOpen className="w-6 h-6 text-[#fc6203]" />
             </div>
             <p className="text-sm font-semibold text-slate-700 dark:text-neutral-300">

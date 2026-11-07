@@ -18,7 +18,7 @@
 }
 
 /* =========================================================================
-   Scrollbar Elimination (Modern App Feel across all devices & browsers)
+   Scrollbar Elimination (Seamless modern app feel across all devices)
    ========================================================================= */
 html, body, #root, * {
   scrollbar-width: none !important;
@@ -43,42 +43,72 @@ html, body, #root, * {
 }
 
 /* =========================================================================
-   ReactBits Liquid Glass & Modern Physics Effects
+   ReactBits Liquid Glass (Auto-adapts between Light and Dark mode)
    ========================================================================= */
 
-/* Liquid Frosted Glass (Dark mode) */
-.glass-panel-dark {
-  background: rgba(10, 10, 10, 0.72);
+/* Light Mode Glass Surface */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  color: #0f172a;
 }
 
-/* Liquid Frosted Glass (Light mode) */
-.glass-panel-light {
-  background: rgba(255, 255, 255, 0.82);
+/* Dark Mode Glass Surface */
+html.dark .glass-panel,
+.dark .glass-panel {
+  background: rgba(12, 12, 12, 0.82) !important;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
 }
 
-/* ReactBits-style spring bounce & wobble */
-@keyframes spring-wobble {
-  0% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.04) rotate(-1.5deg); }
-  50% { transform: scale(0.98) rotate(1deg); }
-  75% { transform: scale(1.02) rotate(-0.5deg); }
-  100% { transform: scale(1) rotate(0deg); }
+/* =========================================================================
+   ReactBits Liquid Jelly Wobble (Squash & Stretch Physics - Zero Shake)
+   ========================================================================= */
+@keyframes jelly-wobble {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.14, 0.86, 1); /* squash Y, expand X */
+  }
+  40% {
+    transform: scale3d(0.86, 1.14, 1); /* stretch Y, compress X */
+  }
+  55% {
+    transform: scale3d(1.08, 0.94, 1); /* damped rebound */
+  }
+  70% {
+    transform: scale3d(0.97, 1.03, 1);
+  }
+  85% {
+    transform: scale3d(1.02, 0.99, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
 }
 
-.hover-wobble {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+.wobble-hover:hover {
+  animation: jelly-wobble 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.hover-wobble:hover {
-  animation: spring-wobble 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+/* Spring Scale & Tap Physics */
+.spring-pill {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+.spring-pill:hover {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.spring-pill:active {
+  transform: scale(0.95);
 }
 
 /* Liquid Glow highlights */
