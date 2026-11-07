@@ -21,8 +21,12 @@ const SECTIONS = [
 
 export default function SectionNav({ active, onSelect }) {
   return (
-    <div className="w-full flex justify-center py-1">
-      <nav className="inline-flex items-center gap-1 sm:gap-1.5 p-1.5 rounded-2xl bg-slate-100/90 dark:bg-[#111111]/90 backdrop-blur-md border border-slate-200/80 dark:border-[#222222] shadow-sm max-w-full overflow-x-auto no-scrollbar scroll-smooth">
+    <div className="w-full flex justify-center px-1">
+      {/* ReactBits Liquid Glass Floating Dock (Zero Scrollbar) */}
+      <nav
+        className="inline-flex items-center gap-1 sm:gap-1.5 p-1.5 rounded-2xl sm:rounded-full glass-panel-light dark:glass-panel-dark max-w-full overflow-x-auto no-scrollbar scroll-smooth"
+        aria-label="Format Categories"
+      >
         {SECTIONS.map(s => {
           const Icon = s.icon;
           const isActive = active === s.id;
@@ -31,13 +35,13 @@ export default function SectionNav({ active, onSelect }) {
               key={s.id}
               type="button"
               onClick={() => onSelect(s.id)}
-              className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer flex-shrink-0 whitespace-nowrap select-none
+              className={`relative flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer flex-shrink-0 whitespace-nowrap select-none hover-wobble active:scale-95
                 ${isActive
-                  ? 'bg-[#fc6203] text-white dark:text-black dark:font-semibold shadow-[0_0_15px_rgba(252,98,3,0.45)]'
-                  : 'text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#1a1a1a]'
+                  ? 'bg-[#fc6203] text-black font-bold shadow-[0_0_20px_rgba(252,98,3,0.65)] scale-[1.03]'
+                  : 'text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/40 dark:hover:bg-white/5'
                 }`}
             >
-              <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-200 ${isActive ? 'scale-110' : ''}`} />
+              <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive ? 'stroke-[2.5]' : ''}`} />
               <span>{s.label}</span>
             </button>
           );

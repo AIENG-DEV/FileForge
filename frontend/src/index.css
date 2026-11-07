@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --accent: #fc6203;
-    --accent-glow: rgba(252, 98, 3, 0.4);
+    --accent-glow: rgba(252, 98, 3, 0.45);
   }
 
   body {
@@ -17,7 +17,71 @@
   }
 }
 
-/* Custom glow and accent utilities */
+/* =========================================================================
+   Scrollbar Elimination (Modern App Feel across all devices & browsers)
+   ========================================================================= */
+html, body, #root, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* =========================================================================
+   ReactBits Liquid Glass & Modern Physics Effects
+   ========================================================================= */
+
+/* Liquid Frosted Glass (Dark mode) */
+.glass-panel-dark {
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Liquid Frosted Glass (Light mode) */
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* ReactBits-style spring bounce & wobble */
+@keyframes spring-wobble {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.04) rotate(-1.5deg); }
+  50% { transform: scale(0.98) rotate(1deg); }
+  75% { transform: scale(1.02) rotate(-0.5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.hover-wobble {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-wobble:hover {
+  animation: spring-wobble 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Liquid Glow highlights */
 .glow-accent {
   box-shadow: 0 0 20px rgba(252, 98, 3, 0.45);
 }
@@ -32,14 +96,14 @@
 
 .glow-border {
   border-color: #fc6203 !important;
-  box-shadow: 0 0 15px rgba(252, 98, 3, 0.35);
+  box-shadow: 0 0 20px rgba(252, 98, 3, 0.35);
 }
 
 .glow-text {
-  text-shadow: 0 0 12px rgba(252, 98, 3, 0.6);
+  text-shadow: 0 0 14px rgba(252, 98, 3, 0.65);
 }
 
-/* Base dark class support */
+/* Theme Backgrounds */
 .dark {
   color-scheme: dark;
 }

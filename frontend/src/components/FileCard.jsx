@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fmtBytes, getCategory, pct } from '../utils/helpers';
 import CategoryIcon from './CategoryIcon';
+import LiquidSlider from './LiquidSlider';
 import {
   X,
   Download,
@@ -62,12 +63,12 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
   const saving = jobInfo?.status === 'done' ? pct(jobInfo.original_size || file.size, jobInfo.result_size) : null;
 
   return (
-    <div className="bg-white dark:bg-[#0c0c0c] rounded-2xl border border-slate-200 dark:border-[#1f1f1f] p-4 flex flex-col gap-3.5 transition-all duration-200 hover:border-slate-300 dark:hover:border-[#2f2f2f] hover:shadow-lg dark:hover:shadow-[0_0_20px_rgba(252,98,3,0.1)]">
+    <div className="glass-panel-light dark:glass-panel-dark rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 transition-all duration-300 hover:shadow-[0_0_30px_rgba(252,98,3,0.18)] hover:border-[#fc6203]/40">
       {/* Header */}
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden
-            bg-slate-100 dark:bg-[#161616] text-[#fc6203] border border-slate-200 dark:border-[#262626]">
+            bg-slate-100/90 dark:bg-white/5 text-[#fc6203] border border-slate-200/80 dark:border-white/10 shadow-sm">
             {previewUrl ? (
               <img src={previewUrl} alt={file.name} className="w-full h-full object-cover" />
             ) : (
@@ -75,7 +76,7 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
             )}
           </div>
           <div className="min-w-0">
-            <p className="font-semibold text-sm truncate text-slate-900 dark:text-neutral-100" title={file.name}>
+            <p className="font-semibold text-sm truncate text-slate-900 dark:text-neutral-100 font-heading" title={file.name}>
               {file.name}
             </p>
             <p className="text-xs text-slate-500 dark:text-neutral-400">
@@ -86,7 +87,7 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
         <button
           type="button"
           onClick={onRemove}
-          className="text-slate-400 hover:text-red-500 dark:text-neutral-500 dark:hover:text-red-400 transition-colors p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-[#1a1a1a]"
+          className="text-slate-400 hover:text-red-500 dark:text-neutral-500 dark:hover:text-red-400 transition-all p-1.5 rounded-lg hover:bg-slate-100/80 dark:hover:bg-white/10 cursor-pointer hover-wobble active:scale-90"
           title="Remove file"
         >
           <X className="w-4 h-4" />
@@ -95,7 +96,7 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
 
       {/* Status Progress */}
       {status && (
-        <div className="space-y-1.5 p-2.5 rounded-xl bg-slate-50 dark:bg-[#141414] border border-slate-200 dark:border-[#222222]">
+        <div className="space-y-1.5 p-3 rounded-xl bg-slate-50/80 dark:bg-white/5 border border-slate-200/80 dark:border-white/10">
           <div className="flex justify-between text-xs font-medium text-slate-600 dark:text-neutral-400">
             <span className="capitalize flex items-center gap-1.5">
               {status === 'done' ? (
@@ -107,10 +108,10 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
               )}
               {status}
             </span>
-            <span>{progress}%</span>
+            <span className="font-mono">{progress}%</span>
           </div>
 
-          <div className="h-1.5 bg-slate-200 dark:bg-[#202020] rounded-full overflow-hidden">
+          <div className="h-1.5 bg-slate-200/80 dark:bg-white/10 rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-300 ${
                 status === 'error'
@@ -147,32 +148,35 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
       {!status || status === 'error' ? (
         <>
           {/* Mode Tabs */}
-          <div className="grid grid-cols-3 gap-1 p-1 bg-slate-100 dark:bg-[#141414] rounded-xl border border-slate-200 dark:border-[#222222] text-xs">
-            {TABS.map(t => (
-              <button
-                key={t}
-                type="button"
-                onClick={() => setTab(t)}
-                className={`py-1.5 rounded-lg font-medium transition-all duration-200 cursor-pointer text-center
-                  ${tab === t
-                    ? 'bg-[#fc6203] text-white dark:text-black dark:font-semibold shadow-[0_0_12px_rgba(252,98,3,0.45)]'
-                    : 'text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white'
-                  }`}
-              >
-                {t}
-              </button>
-            ))}
+          <div className="grid grid-cols-3 gap-1 p-1 bg-slate-100/90 dark:bg-white/5 rounded-xl border border-slate-200/80 dark:border-white/10 text-xs">
+            {TABS.map(t => {
+              const isSelected = tab === t;
+              return (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => setTab(t)}
+                  className={`py-1.5 rounded-lg font-medium transition-all duration-200 cursor-pointer text-center select-none hover-wobble active:scale-95
+                    ${isSelected
+                      ? 'bg-[#fc6203] text-black font-semibold shadow-[0_0_14px_rgba(252,98,3,0.5)] scale-[1.02]'
+                      : 'text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white'
+                    }`}
+                >
+                  {t}
+                </button>
+              );
+            })}
           </div>
 
           {tab === 'Compress' && (
-            <div className="space-y-2.5">
+            <div className="space-y-3">
               {cat === 'audio' ? (
                 <div>
-                  <label className="text-[11px] font-medium text-slate-500 dark:text-neutral-400">Target Bitrate</label>
+                  <label className="text-[11px] font-medium text-slate-500 dark:text-neutral-400 block mb-1">Target Bitrate</label>
                   <select
                     value={bitrate}
                     onChange={e => setBitrate(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-[#141414] border border-slate-200 dark:border-[#262626] dark:text-white rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-[#fc6203]"
+                    className="w-full bg-slate-50/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 dark:text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#fc6203]"
                   >
                     <option value="64k">64 kbps (Max Compression)</option>
                     <option value="96k">96 kbps (Voice / Podcast)</option>
@@ -191,7 +195,7 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
                   <select
                     value={crf}
                     onChange={e => setCrf(+e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-[#141414] border border-slate-200 dark:border-[#262626] dark:text-white rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-[#fc6203]"
+                    className="w-full bg-slate-50/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 dark:text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#fc6203]"
                   >
                     <option value={23}>CRF 23 — High Quality (Minor compression)</option>
                     <option value={28}>CRF 28 — Balanced (Recommended for Web)</option>
@@ -201,27 +205,21 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
                 </div>
               ) : (
                 <>
-                  <div>
-                    <div className="flex justify-between text-xs text-slate-600 dark:text-neutral-400 mb-1.5 font-medium">
-                      <span>Compression Quality</span>
-                      <span className="text-[#fc6203] font-mono font-bold">{quality}%</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="1"
-                      max="100"
-                      value={quality}
-                      onChange={e => setQuality(+e.target.value)}
-                      className="w-full accent-[#fc6203] cursor-pointer"
-                    />
-                  </div>
+                  <LiquidSlider
+                    value={quality}
+                    onChange={setQuality}
+                    min={1}
+                    max={100}
+                    label="Compression Quality"
+                    unit="%"
+                  />
                   {cat === 'image' && (
                     <input
                       type="number"
                       placeholder="Max width px (optional resize)"
                       value={maxWidth}
                       onChange={e => setMaxWidth(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-[#141414] border border-slate-200 dark:border-[#262626] dark:text-white rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-[#fc6203] focus:ring-1 focus:ring-[#fc6203]"
+                      className="w-full bg-slate-50/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 dark:text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#fc6203] focus:ring-1 focus:ring-[#fc6203]"
                     />
                   )}
                 </>
@@ -230,12 +228,12 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
           )}
 
           {tab === 'Convert' && (
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <label className="text-[11px] font-medium text-slate-500 dark:text-neutral-400">Target Format</label>
               <select
                 value={targetFmt}
                 onChange={e => setTargetFmt(e.target.value)}
-                className="w-full bg-slate-50 dark:bg-[#141414] border border-slate-200 dark:border-[#262626] dark:text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#fc6203] focus:ring-1 focus:ring-[#fc6203]"
+                className="w-full bg-slate-50/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 dark:text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#fc6203] focus:ring-1 focus:ring-[#fc6203]"
               >
                 {outputFormats.length === 0 ? (
                   <option>No formats available</option>
@@ -251,12 +249,12 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
           )}
 
           {tab === 'Upscale' && (
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <label className="text-[11px] font-medium text-slate-500 dark:text-neutral-400">Scale Factor</label>
               <select
                 value={scale}
                 onChange={e => setScale(+e.target.value)}
-                className="w-full bg-slate-50 dark:bg-[#141414] border border-slate-200 dark:border-[#262626] dark:text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#fc6203] focus:ring-1 focus:ring-[#fc6203]"
+                className="w-full bg-slate-50/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 dark:text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-[#fc6203] focus:ring-1 focus:ring-[#fc6203]"
               >
                 {[1.5, 2, 3, 4].map(s => (
                   <option key={s} value={s}>
@@ -271,9 +269,9 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
             type="button"
             onClick={handleProcess}
             disabled={tab === 'Convert' && outputFormats.length === 0}
-            className="w-full bg-[#fc6203] hover:bg-[#e05400] disabled:bg-slate-200 dark:disabled:bg-[#1f1f1f] disabled:text-slate-400 dark:disabled:text-neutral-600 text-white dark:text-black font-semibold text-xs py-2.5 rounded-xl transition-all duration-200 cursor-pointer shadow-[0_0_15px_rgba(252,98,3,0.35)] hover:shadow-[0_0_22px_rgba(252,98,3,0.6)] flex items-center justify-center gap-1.5"
+            className="w-full bg-[#fc6203] hover:bg-[#e05400] disabled:bg-slate-200 dark:disabled:bg-white/10 disabled:text-slate-400 dark:disabled:text-neutral-600 text-black font-semibold text-xs py-2.5 rounded-xl transition-all duration-300 cursor-pointer shadow-[0_0_15px_rgba(252,98,3,0.4)] hover:shadow-[0_0_25px_rgba(252,98,3,0.7)] flex items-center justify-center gap-1.5 hover-wobble active:scale-95"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 stroke-[2.5]" />
             <span>Process File</span>
           </button>
         </>
@@ -281,9 +279,9 @@ export default function FileCard({ file, formats, jobInfo, onProcess, onRemove }
         <a
           href={jobInfo.downloadUrl}
           download={jobInfo.result_filename}
-          className="w-full bg-[#fc6203] hover:bg-[#e05400] text-white dark:text-black font-semibold text-xs py-2.5 rounded-xl transition-all duration-200 text-center flex items-center justify-center gap-2 shadow-[0_0_18px_rgba(252,98,3,0.5)] hover:shadow-[0_0_25px_rgba(252,98,3,0.7)]"
+          className="w-full bg-[#fc6203] hover:bg-[#e05400] text-black font-semibold text-xs py-2.5 rounded-xl transition-all duration-300 text-center flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(252,98,3,0.55)] hover:shadow-[0_0_30px_rgba(252,98,3,0.8)] hover-wobble active:scale-95"
         >
-          <Download className="w-4 h-4" />
+          <Download className="w-4 h-4 stroke-[2.5]" />
           <span>Download Processed File</span>
         </a>
       ) : null}
